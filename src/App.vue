@@ -1,12 +1,41 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/">{{$t('documentation.documentation')}}</router-link> |
+      <router-link to="/about">{{$t('documentation.github')}}</router-link>
     </div>
+    <input v-for="item in dataEn" :key="item.value" type="button" @click="changeEn(item.lang)" :value="item.value">
     <router-view/>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data () {
+    return {
+      dataEn: [
+        {
+          value: '日语',
+          lang: 'ja'
+        },
+        {
+          value: '中文',
+          lang: 'zh'
+        }
+      ]
+    }
+  },
+  methods: {
+    changeEn (lang) {
+      // window.localStorage.setItem('language', lang)
+      // location.reload()
+      this.$i18n.locale = lang
+      // this.$i18n.mergeLocaleMessage(lang, local[lang])
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
